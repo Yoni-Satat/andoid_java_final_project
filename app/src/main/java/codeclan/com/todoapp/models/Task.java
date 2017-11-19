@@ -37,6 +37,14 @@ public class Task {
         return completed;
     }
 
+    public String markCompleted() {
+        if (this.completed == false) {
+            return "Get it done";
+        } else {
+            return "Completed";
+        }
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

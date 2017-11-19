@@ -21,6 +21,16 @@ public class TaskList {
         tasksList.add(new Task(0, "nike", "just do it", false));
         tasksList.add(new Task(0, "nike", "just do it", false));
         tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
+        tasksList.add(new Task(0, "nike", "just do it", false));
     }
 
     public ArrayList<Task> getTasksList() {

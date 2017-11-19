@@ -32,11 +32,11 @@ public class TasksAdapter extends ArrayAdapter<Task> {
 
 
         // set views for title and completed columns:
-        TextView title = listItemsView.findViewById(R.id.title);
+        TextView title = listItemsView.findViewById(R.id.listView_title);
         title.setText(currentTaskItem.getTitle().toString());
 
         TextView completed = listItemsView.findViewById(R.id.listView_mark_completed);
-        completed.setText(currentTaskItem.getTitle());
+        completed.setText(currentTaskItem.markCompleted());
 
 
         // set tag for the onClick event:
