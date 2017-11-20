@@ -33,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
         //finish();
 
+
+
+        //TextView textView = findViewById(R.id.listView_mark_completed);
+        //textView.setAdapter(tasksAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         ArrayList<Task> tasks = myDb.findAll();
 
         TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
@@ -41,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.list);
         // connect the list view to the adapter:
         listView.setAdapter(tasksAdapter);
-
-        //TextView textView = findViewById(R.id.listView_mark_completed);
-        //textView.setAdapter(tasksAdapter);
     }
 
     // add onClick event
