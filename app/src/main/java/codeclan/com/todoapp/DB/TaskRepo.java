@@ -1,11 +1,15 @@
 package codeclan.com.todoapp.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import java.sql.SQLInput;
+import java.util.ArrayList;
 
 import codeclan.com.todoapp.models.Task;
 
@@ -32,7 +36,7 @@ public class TaskRepo extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " BOOLEAN)");
     }
 
     @Override
@@ -41,15 +45,56 @@ public class TaskRepo extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(Task task) {
+    public void save(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         SQLiteStatement prepStatement = db.compileStatement("INSERT INTO todo(title,description, completed) values(?,?,?)");
 
         prepStatement.bindString(1, task.getTitle());
         prepStatement.bindString(2, task.getDescription());
-        prepStatement.bindString(3, task.markCompleted());
+        prepStatement.bindString(3, "false");
 
         prepStatement.execute();
+    }
+
+    public ArrayList<Task> findAll() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("SELECT * FROM todo", null);
+
+        ArrayList<Task> returnedTaskList = new ArrayList<>();
+
+        if(result != null) {
+            if(result.moveToFirst()) {
+                do {
+
+                    String completed = result.getString(3);
+                    boolean complete = false;
+
+                    if (completed.equals("true")) {
+                        complete = true;
+                    }
+
+                    Task task = new Task(result.getInt(0), result.getString(1), result.getString(2), complete);
+                    returnedTaskList.add(task);
+
+
+                } while (result.moveToNext());
+            }
+        }
+
+        return returnedTaskList;
+
+    }
+
+    public boolean update(Task task) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID, task.getId());
+        contentValues.put(TITLE, task.getTitle());
+        contentValues.put(DESCRIPTION, task.getDescription());
+        contentValues.put(COMPLETED, Boolean.toString(task.getCompleted()));
+        int val = db.update(TABLE_NAME, contentValues, "id = " + task.getId(), null);
+
+        return val != -1;
     }
 }

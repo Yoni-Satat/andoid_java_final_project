@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ToDo App</string>
     <string name="add_task">Add New</string>
+    <string name="add_new_task">Add New Todo</string>
+    <string name="enter_task">Enter todo detalis...</string>
+    <string name="save_new_todo">SAVE</string>
 </resources>

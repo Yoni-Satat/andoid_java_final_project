@@ -37,6 +37,10 @@ public class Task {
         return completed;
     }
 
+    public boolean getCompleted() {
+        return this.completed;
+    }
+
     public String markCompleted() {
         if (this.completed == false) {
             return "Get it done";
