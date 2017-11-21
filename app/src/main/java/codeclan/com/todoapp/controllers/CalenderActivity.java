@@ -1,0 +1,17 @@
+package codeclan.com.todoapp.controllers;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import codeclan.com.todoapp.R;
+
+public class CalenderActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calender);
+    }
+}

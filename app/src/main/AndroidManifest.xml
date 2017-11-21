@@ -17,8 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".controllers.AddTaskActivity" />
-        <activity android:name=".controllers.ShowTaskDescription"
-            android:label="Todo Description"></activity>
+        <activity
+            android:name=".controllers.ShowTaskDescription"
+            android:label="Todo Description" />
+        <activity android:name=".controllers.CalenderActivity"></activity>
     </application>
 
 </manifest>

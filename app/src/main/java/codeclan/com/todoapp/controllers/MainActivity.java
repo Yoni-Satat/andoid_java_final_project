@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(addNewTodo);
     }
 
+    public void onClickGoToCalender(View view) {
+        Intent goToCalender = new Intent(this, CalenderActivity.class);
+        startActivity(goToCalender);
+    }
+
     public void onClickDeleteAll(View view) {
         myDb.deleteAll();
 
