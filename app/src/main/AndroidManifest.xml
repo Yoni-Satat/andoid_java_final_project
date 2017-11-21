@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.AddTaskActivity"></activity>
+        <activity android:name=".controllers.AddTaskActivity" />
+        <activity android:name=".controllers.ShowTaskDescription"
+            android:label="Todo Description"></activity>
     </application>
 
 </manifest>

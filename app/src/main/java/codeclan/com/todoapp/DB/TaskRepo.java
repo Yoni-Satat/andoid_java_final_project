@@ -103,4 +103,27 @@ public class TaskRepo extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_NAME);
         db.close();
     }
+
+    public Task findById(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?", new String[] {String.valueOf(id)});
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+
+            boolean completed = cursor.getString(3).equals("true");
+
+            Task task = new Task(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    completed
+            );
+
+            return task;
+        }
+
+        return null;
+    }
 }

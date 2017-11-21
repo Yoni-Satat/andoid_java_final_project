@@ -5,4 +5,5 @@
     <string name="enter_task">Enter todo detalis...</string>
     <string name="save_new_todo">SAVE</string>
     <string name="delete_all">DELETE ALL TODOS</string>
+    <string name="todo_title">Enter todo title...</string>
 </resources>

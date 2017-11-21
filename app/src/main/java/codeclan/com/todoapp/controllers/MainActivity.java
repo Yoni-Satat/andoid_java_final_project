@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -47,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         Task selectedTask = (Task) titleTextView.getTag();
-        Toast.makeText(this, selectedTask.getTitle(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, selectedTask.getDescription(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ShowTaskDescription.class);
+//        TextView showDesc = (TextView) findViewById(R.id.todo_description);
+
+        intent.putExtra("id", selectedTask.getId());
+
+
+        startActivity(intent);
     }
 
     public void onClickMarkComplete(View markCompletedtextView) {
