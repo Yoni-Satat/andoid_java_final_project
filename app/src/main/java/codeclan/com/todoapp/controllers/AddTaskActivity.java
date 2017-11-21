@@ -31,7 +31,7 @@ public class AddTaskActivity extends AppCompatActivity {
         String description = descriptionInput.getText().toString();
 
         TextView titleInput = findViewById(R.id.editText2);
-        String title = descriptionInput.getText().toString();
+        String title = titleInput.getText().toString();
 
         Task task = new Task(title, description);
         myDb.save(task);

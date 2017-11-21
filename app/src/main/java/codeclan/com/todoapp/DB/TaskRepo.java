@@ -97,4 +97,10 @@ public class TaskRepo extends SQLiteOpenHelper {
 
         return val != -1;
     }
+
+    public void deleteAll() {
+        SQLiteDatabase db = getReadableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.close();
+    }
 }

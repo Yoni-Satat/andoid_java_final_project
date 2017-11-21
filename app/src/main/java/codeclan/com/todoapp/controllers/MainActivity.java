@@ -26,17 +26,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDb = new TaskRepo(this);
-//
-//        Task task = new Task(0, "derp", "desc", true);
-//
-//        myDb.save(task);
-
-        //finish();
-
-
-
-        //TextView textView = findViewById(R.id.listView_mark_completed);
-        //textView.setAdapter(tasksAdapter);
     }
 
     @Override
@@ -86,5 +75,18 @@ public class MainActivity extends AppCompatActivity {
     public void onClickAddTodo(View view) {
         Intent addNewTodo = new Intent(this, AddTaskActivity.class);
         startActivity(addNewTodo);
+    }
+
+    public void onClickDeleteAll(View view) {
+        myDb.deleteAll();
+
+        ArrayList<Task> tasks = myDb.findAll();
+        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
+
+
+        // get the list view back finding it by id:
+        ListView listView = findViewById(R.id.list);
+        // connect the list view to the adapter:
+        listView.setAdapter(tasksAdapter);
     }
 }
