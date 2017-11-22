@@ -51,7 +51,7 @@ public class Task {
         if (this.completed == false) {
             return "Get it done";
         } else {
-            return "Completed";
+            return "Yay one less to go";
         }
     }
 

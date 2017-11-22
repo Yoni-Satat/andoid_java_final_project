@@ -17,7 +17,7 @@ public class TaskTest {
 
     @Before
     public void before() {
-        task = new Task(0, "Finish app", "Finish todo list app", false);
+        task = new Task(0, "Finish app", "Finish todo list app", false, "25/11");
     }
 
     @Test

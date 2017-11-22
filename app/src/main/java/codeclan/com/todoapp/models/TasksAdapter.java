@@ -42,12 +42,21 @@ public class TasksAdapter extends ArrayAdapter<Task> {
 
         TextView goToCalender = listItemsView.findViewById(R.id.textView_dateDue);
 
+        TextView dueDate = listItemsView.findViewById(R.id.textView_dateDue);
+
+
+        String dueDateStr = currentTaskItem.getDueDate();
+        if(dueDateStr == null) {
+            dueDateStr = "SELECT DATE";
+        }
+         dueDate.setText(dueDateStr);
 
         // set tag for the onClick event:
         completed.setTag(currentTaskItem);
         deleteTask.setTag(currentTaskItem);
         title.setTag(currentTaskItem);
         goToCalender.setTag(currentTaskItem);
+        dueDate.setTag(currentTaskItem);
 
         return listItemsView;
     }

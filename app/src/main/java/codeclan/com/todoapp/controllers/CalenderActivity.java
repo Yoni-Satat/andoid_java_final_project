@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
@@ -49,6 +50,8 @@ public class CalenderActivity extends AppCompatActivity implements DatePicker.On
 
     @Override
     public void onDateChanged(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+
+
 
         String date = dayOfMonth + "/" + (monthOfYear + 1);
 
