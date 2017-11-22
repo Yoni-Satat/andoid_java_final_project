@@ -1,14 +1,10 @@
 package codeclan.com.todoapp.controllers;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +16,7 @@ import codeclan.com.todoapp.models.TasksAdapter;
 public class MainActivity extends AppCompatActivity {
 
     TaskRepo myDb;
+    private boolean showAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDb = new TaskRepo(this);
+        this.showAll = true;
     }
 
     @Override
@@ -34,13 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         ArrayList<Task> tasks = myDb.findAll();
-
-        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
-
-        // get the list view back finding it by id:
-        ListView listView = findViewById(R.id.list);
-        // connect the list view to the adapter:
-        listView.setAdapter(tasksAdapter);
+        refresh(tasks);
     }
 
     // add onClick event
@@ -68,15 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<Task> tasks = myDb.findAll();
-
-        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
-
-
-
-        // get the list view back finding it by id:
-        ListView listView = findViewById(R.id.list);
-        // connect the list view to the adapter:
-        listView.setAdapter(tasksAdapter);
+        refresh(tasks);
     }
 
     // Button addNewTodo = (Button)findViewById(R.id.addNewTodo);
@@ -97,13 +81,7 @@ public class MainActivity extends AppCompatActivity {
         myDb.deleteAll();
 
         ArrayList<Task> tasks = myDb.findAll();
-        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
-
-
-        // get the list view back finding it by id:
-        ListView listView = findViewById(R.id.list);
-        // connect the list view to the adapter:
-        listView.setAdapter(tasksAdapter);
+        refresh(tasks);
     }
 
     public void onClickDeleteTask(View deleteTaskTextView) {
@@ -111,10 +89,32 @@ public class MainActivity extends AppCompatActivity {
         myDb.deleteTask(selectedTask);
 
         ArrayList<Task> tasks = myDb.findAll();
-        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
+        refresh(tasks);
 
+    }
+
+    public void toggleHideCompleted(View view) {
+        ArrayList<Task> tasks = myDb.findAll();
+
+        ArrayList<Task> tasksToShow = new ArrayList<>();
+
+        if(showAll) {
+            tasksToShow = tasks;
+        } else {
+            for(Task task: tasks) {
+                if(!task.getCompleted()) {
+                    tasksToShow.add(task);
+                }
+            }
+        }
+        refresh(tasksToShow);
+        showAll = !showAll;
+
+    }
+
+    public void refresh(ArrayList<Task> tasks) {
+        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(tasksAdapter);
-
     }
 }
