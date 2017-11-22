@@ -16,11 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.AddTaskActivity" />
+        <activity android:name=".controllers.AddTaskActivity"
+                  android:label="Add Todo"/>
         <activity
             android:name=".controllers.ShowTaskDescription"
             android:label="Todo Description" />
-        <activity android:name=".controllers.CalenderActivity"></activity>
+        <activity android:name=".controllers.CalenderActivity"
+                  android:label="Select Due Date"></activity>
     </application>
 
 </manifest>

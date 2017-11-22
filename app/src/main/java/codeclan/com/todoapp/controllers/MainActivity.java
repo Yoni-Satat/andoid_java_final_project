@@ -86,8 +86,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(addNewTodo);
     }
 
-    public void onClickGoToCalender(View view) {
+    public void onClickGoToCalender(View calenderTextView) {
+        Task selectedTask = (Task) calenderTextView.getTag();
         Intent goToCalender = new Intent(this, CalenderActivity.class);
+        goToCalender.putExtra("id", selectedTask.getId());
         startActivity(goToCalender);
     }
 

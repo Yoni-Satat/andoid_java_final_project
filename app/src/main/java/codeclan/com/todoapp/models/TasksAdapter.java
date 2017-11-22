@@ -40,11 +40,14 @@ public class TasksAdapter extends ArrayAdapter<Task> {
 
         TextView deleteTask = listItemsView.findViewById(R.id.deleteTodo);
 
-        completed.setTag(currentTaskItem);
-        deleteTask.setTag(currentTaskItem);
+        TextView goToCalender = listItemsView.findViewById(R.id.textView_dateDue);
+
 
         // set tag for the onClick event:
+        completed.setTag(currentTaskItem);
+        deleteTask.setTag(currentTaskItem);
         title.setTag(currentTaskItem);
+        goToCalender.setTag(currentTaskItem);
 
         return listItemsView;
     }
