@@ -12,7 +12,7 @@ public class Task {
     private String title;
     private String description;
     private boolean completed;
-    private long dueDate;
+    private String dueDate;
 
     public Task(String title, String description) {
         this.title = title;
@@ -20,10 +20,11 @@ public class Task {
         this.completed = false;
     }
 
-    public Task(int id, String title, String description, boolean completed) {
+    public Task(int id, String title, String description, boolean completed, String dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.dueDate = dueDate;
         this.completed = completed;
     }
 
@@ -66,11 +67,11 @@ public class Task {
         return title;
     }
 
-    public Object getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(long dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 }

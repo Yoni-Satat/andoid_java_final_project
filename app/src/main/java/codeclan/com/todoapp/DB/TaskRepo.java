@@ -31,13 +31,13 @@ public class TaskRepo extends SQLiteOpenHelper {
     public TaskRepo(Context context) {
         // taken out from original constructor
         // String name, SQLiteDatabase.CursorFactory factory, int version
-        super(context, DB_NAME, null, 3);
+        super(context, DB_NAME, null, 5);
         SQLiteDatabase db = this.getReadableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " BOOLEAN, " + DUE_DATE + " DATETIME)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " BOOLEAN, " + DUE_DATE + " TEXT)");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class TaskRepo extends SQLiteOpenHelper {
                         complete = true;
                     }
 
-                    Task task = new Task(result.getInt(0), result.getString(1), result.getString(2), complete);
+                    Task task = new Task(result.getInt(0), result.getString(1), result.getString(2), complete, result.getString(4));
                     returnedTaskList.add(task);
 
 
@@ -88,7 +88,7 @@ public class TaskRepo extends SQLiteOpenHelper {
     }
 
     public boolean update(Task task) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ID, task.getId());
         contentValues.put(TITLE, task.getTitle());
@@ -127,7 +127,8 @@ public class TaskRepo extends SQLiteOpenHelper {
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    completed
+                    completed,
+                    cursor.getString(4)
             );
 
             return task;
