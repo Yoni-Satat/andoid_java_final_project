@@ -8,4 +8,5 @@
     <string name="todo_title">Enter todo title...</string>
     <string name="date_due">ADD DUE DATE</string>
     <string name="delete_todo">DELETE</string>
+    <string name="hide_completed">HIDE COMPLETED</string>
 </resources>

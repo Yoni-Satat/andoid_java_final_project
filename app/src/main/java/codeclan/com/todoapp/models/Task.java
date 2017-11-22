@@ -1,7 +1,5 @@
 package codeclan.com.todoapp.models;
 
-import java.util.ArrayList;
-
 /**
  * Created by user on 18/11/2017.
  */
@@ -24,8 +22,8 @@ public class Task {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
         this.completed = completed;
+        this.dueDate = dueDate;
     }
 
     public int getId() {
@@ -74,4 +72,6 @@ public class Task {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
+
+
 }

@@ -1,14 +1,20 @@
 package codeclan.com.todoapp.controllers;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import codeclan.com.todoapp.DB.TaskRepo;
 import codeclan.com.todoapp.R;
@@ -18,6 +24,8 @@ public class CalenderActivity extends AppCompatActivity implements DatePicker.On
 
     TaskRepo myDb;
     private Task task;
+    Date dateToCheck;
+    TextView dateToChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +61,38 @@ public class CalenderActivity extends AppCompatActivity implements DatePicker.On
 
 
 
-        String date = dayOfMonth + "/" + (monthOfYear + 1);
+        String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
 
         task.setDueDate(date);
 
         //TaskRepo myDb = new TaskRepo(this);
         myDb.update(task);
+
+        // trying to change color after comparing dates:
+        //changeDateColor(dateToChange);
+
+
         finish();
     }
+
+    public void changeDateColor(View dateView) {
+        String dueDate = task.getDueDate();
+
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dateToCheck = sdf.parse(dueDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        Date currentDate = new Date();
+        if (currentDate.compareTo(dateToCheck) > 0) {
+            dateToChange = findViewById(R.id.textView_dateDue);
+//            Task selectedTask = (Task) dateView.getTag();
+            dateToChange.setTextColor(Color.parseColor("#f44242"));
+        }
+    }
+
+
 }

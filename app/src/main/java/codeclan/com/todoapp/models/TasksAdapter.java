@@ -1,13 +1,18 @@
 package codeclan.com.todoapp.models;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import codeclan.com.todoapp.R;
 
@@ -43,6 +48,7 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         TextView goToCalender = listItemsView.findViewById(R.id.textView_dateDue);
 
         TextView dueDate = listItemsView.findViewById(R.id.textView_dateDue);
+        TextView dateView = listItemsView.findViewById(R.id.textView_dateDue);
 
 
         String dueDateStr = currentTaskItem.getDueDate();
@@ -57,6 +63,27 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         title.setTag(currentTaskItem);
         goToCalender.setTag(currentTaskItem);
         dueDate.setTag(currentTaskItem);
+        dateView.setTag(currentTaskItem);
+
+        String taskDueDate = currentTaskItem.getDueDate();
+
+        if (taskDueDate != null) {
+            DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date dateToCheck = null;
+
+            try {
+                dateToCheck = sdf.parse(taskDueDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            Date currentDate = new Date();
+            if (currentDate.compareTo(dateToCheck) > 0) {
+//            Task selectedTask = (Task) dateView.getTag();
+                dueDate.setTextColor(Color.parseColor("#f44242"));
+            }
+        }
 
         return listItemsView;
     }
