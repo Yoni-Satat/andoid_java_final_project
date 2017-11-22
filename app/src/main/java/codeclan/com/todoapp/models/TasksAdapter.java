@@ -38,7 +38,10 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         TextView completed = listItemsView.findViewById(R.id.listView_mark_completed);
         completed.setText(currentTaskItem.markCompleted());
 
+        TextView deleteTask = listItemsView.findViewById(R.id.deleteTodo);
+
         completed.setTag(currentTaskItem);
+        deleteTask.setTag(currentTaskItem);
 
         // set tag for the onClick event:
         title.setTag(currentTaskItem);

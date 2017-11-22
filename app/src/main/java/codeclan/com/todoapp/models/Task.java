@@ -12,6 +12,7 @@ public class Task {
     private String title;
     private String description;
     private boolean completed;
+    private long dueDate;
 
     public Task(String title, String description) {
         this.title = title;
@@ -63,5 +64,13 @@ public class Task {
 
     public String getTitle() {
         return title;
+    }
+
+    public Object getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(long dueDate) {
+        this.dueDate = dueDate;
     }
 }

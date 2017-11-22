@@ -25,18 +25,19 @@ public class TaskRepo extends SQLiteOpenHelper {
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String COMPLETED = "completed";
+    public static final String DUE_DATE = "due_date";
 
 
     public TaskRepo(Context context) {
         // taken out from original constructor
         // String name, SQLiteDatabase.CursorFactory factory, int version
-        super(context, DB_NAME, null, 2);
+        super(context, DB_NAME, null, 3);
         SQLiteDatabase db = this.getReadableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " BOOLEAN)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT, " + DESCRIPTION + " TEXT, " + COMPLETED + " BOOLEAN, " + DUE_DATE + " DATETIME)");
     }
 
     @Override
@@ -93,6 +94,7 @@ public class TaskRepo extends SQLiteOpenHelper {
         contentValues.put(TITLE, task.getTitle());
         contentValues.put(DESCRIPTION, task.getDescription());
         contentValues.put(COMPLETED, Boolean.toString(task.getCompleted()));
+        contentValues.put(DUE_DATE, task.getDueDate().toString());
         int val = db.update(TABLE_NAME, contentValues, "id = " + task.getId(), null);
 
         return val != -1;
@@ -101,6 +103,13 @@ public class TaskRepo extends SQLiteOpenHelper {
     public void deleteAll() {
         SQLiteDatabase db = getReadableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.close();
+    }
+
+    public void deleteTask(Task task) {
+        String id = String.valueOf(task.getId());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, ID + " = ? ", new String[]{String.valueOf(id)});
         db.close();
     }
 

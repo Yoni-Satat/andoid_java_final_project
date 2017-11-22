@@ -103,4 +103,16 @@ public class MainActivity extends AppCompatActivity {
         // connect the list view to the adapter:
         listView.setAdapter(tasksAdapter);
     }
+
+    public void onClickDeleteTask(View deleteTaskTextView) {
+        Task selectedTask = (Task) deleteTaskTextView.getTag();
+        myDb.deleteTask(selectedTask);
+
+        ArrayList<Task> tasks = myDb.findAll();
+        TasksAdapter tasksAdapter = new TasksAdapter(this, tasks);
+
+        ListView listView = findViewById(R.id.list);
+        listView.setAdapter(tasksAdapter);
+
+    }
 }
