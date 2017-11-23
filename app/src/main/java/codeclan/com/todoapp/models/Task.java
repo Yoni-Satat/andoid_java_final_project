@@ -49,7 +49,7 @@ public class Task {
         if (this.completed == false) {
             return "Get it done";
         } else {
-            return "Yay one less to go";
+            return "DONE";
         }
     }
 

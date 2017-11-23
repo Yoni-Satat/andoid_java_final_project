@@ -3,9 +3,6 @@ package codeclan.com.todoapp.controllers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -120,20 +117,4 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(tasksAdapter);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
-    //@Override
-    //public boolean onOptionsItemSelected(MenuItem item) {
-        //if(item.getItemId() == R.id.todo_description) {
-            //Intent intent = new Intent(this, ShowTaskDescription.class);
-            //startActivity(intent);
-        //}
-        //return true;
-    //}
 }

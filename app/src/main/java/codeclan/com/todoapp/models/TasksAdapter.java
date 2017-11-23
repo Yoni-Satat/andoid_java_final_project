@@ -48,14 +48,13 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         TextView goToCalender = listItemsView.findViewById(R.id.textView_dateDue);
 
         TextView dueDate = listItemsView.findViewById(R.id.textView_dateDue);
-        TextView dateView = listItemsView.findViewById(R.id.textView_dateDue);
-
+        dueDate.setTextColor(Color.parseColor("#000000"));
 
         String dueDateStr = currentTaskItem.getDueDate();
-        if(dueDateStr == null) {
-            dueDateStr = "SELECT DATE";
+        if(dueDateStr != null) {
+//            dueDateStr = "SELECT DATE";
+            dueDate.setText(dueDateStr);
         }
-         dueDate.setText(dueDateStr);
 
         // set tag for the onClick event:
         completed.setTag(currentTaskItem);
@@ -63,26 +62,28 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         title.setTag(currentTaskItem);
         goToCalender.setTag(currentTaskItem);
         dueDate.setTag(currentTaskItem);
-        dateView.setTag(currentTaskItem);
 
         String taskDueDate = currentTaskItem.getDueDate();
 
-        if (taskDueDate != null) {
-            DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date dateToCheck = null;
+        if (taskDueDate == null) {
+            return listItemsView;
+        }
 
-            try {
-                dateToCheck = sdf.parse(taskDueDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateToCheck = null;
+
+        try {
+            dateToCheck = sdf.parse(taskDueDate);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
-            Date currentDate = new Date();
-            if (currentDate.compareTo(dateToCheck) > 0) {
+        Date currentDate = new Date();
+        if (currentDate.compareTo(dateToCheck) > 0) {
 //            Task selectedTask = (Task) dateView.getTag();
-                dueDate.setTextColor(Color.parseColor("#f44242"));
-            }
+            dueDate.setTextColor(Color.parseColor("#f44242"));
         }
 
         return listItemsView;
