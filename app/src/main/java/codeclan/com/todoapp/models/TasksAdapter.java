@@ -48,7 +48,7 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         TextView goToCalender = listItemsView.findViewById(R.id.textView_dateDue);
 
         TextView dueDate = listItemsView.findViewById(R.id.textView_dateDue);
-        dueDate.setTextColor(Color.parseColor("#000000"));
+        dueDate.setTextColor(Color.parseColor("#FF303F9F"));
 
         String dueDateStr = currentTaskItem.getDueDate();
         if(dueDateStr != null) {
